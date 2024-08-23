@@ -1,8 +1,8 @@
 ## Watermark 类
 
-> * 通用 js 生成水印类，给页面的某个区域加上水印。
-> * 页面需要添加水印标识版权时使用。
-> * 适用于防止信息盗用。
+> - 通用 js 生成水印类，给页面的某个区域加上水印。
+> - 页面需要添加水印标识版权时使用。
+> - 适用于防止信息盗用。
 
 #### 注意：该类会给传入的水印容器添加`position:relative;`样式，请注意处理。由于汉字和英文书写展示方式不同，多行展示并旋转时可能导致边缘被切割。
 
@@ -42,58 +42,23 @@
 | fontStyle  | 字体样式         | `none` \| `normal` \| `italic` \| `oblique`                                                                       | normal     |
 | textAlign  | 指定文本对齐方向 | [CanvasTextAlign](https://developer.mozilla.org/docs/Web/API/CanvasRenderingContext2D/textAlign)                  |
 
-### 示例
-```html
-<!DOCTYPE html>
-<html lang="en">
+### 使用示例
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="../watermark/dist/index.umd.js"></script>
-  <title>Document</title>
-  <style>
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
+[在线示例，点击进入](https://watermark-playground.vercel.app/)
+
+```js
+  import Watermark from '@yugu/watermark'
+  const watermark = new Watermark({
+    container:'your-dom',
+    font:{
+      fontSize:22
+    },
+    ...
+  })
+  watermark.updateWatermark({
+    rotate:0,
+    font:{
+      fontSize:12
     }
-
-    #watermark-container {
-      border: 1px solid red;
-      height: 1000px;
-    }
-  </style>
-</head>
-
-<body>
-  <div>
-    <label>水印内容</label>
-    <input type="text" id="input">
-  </div>
-  <div id="watermark-container">
-  </div>
-  <script>
-    const Watermark = globalThis.Watermark;
-    // 获取要添加水印的 DOM 容器元素
-    const container = document.getElementById('watermark-container');
-
-    // 实例化 Watermark 类，传入配置选项
-    const watermark = new Watermark({
-      container,  // 目标容器元素
-    });
-
-    const input = document.getElementById('input');
-    input.addEventListener('input', (e) => {
-      const content = e.target.value;
-      watermark.updateWatermark({
-        content,
-      });
-    });
-  </script>
-</body>
-
-</html>
+  })
 ```
-
