@@ -1,0 +1,15 @@
+{
+  "name": "yugu-watermark",
+  "version": "1.0.0",
+  "description": "水印",
+  "main": "index.js",
+  "scripts": {
+    "build": "pnpm --filter @yugu/watermark build",
+    "dev:playground": "pnpm --filter playground dev",
+    "dev:watermark": "pnpm --filter @yugu/watermark dev",
+    "release": "pnpm --filter @yugu/watermark publish --access public"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
