@@ -2,7 +2,7 @@ import { checkHasChinese } from './utils'
 export const getFontGap = word => (checkHasChinese(word) ? 4 : 3)
 function patchWordRenderHeight(word) {
   if (checkHasChinese(word)) {
-    return 4
+    return 2
   } else {
     return 2
   }
