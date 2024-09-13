@@ -4,7 +4,7 @@
 > - 页面需要添加水印标识版权时使用。
 > - 适用于防止信息盗用。
 
-#### 注意：该类会给传入的水印容器添加`position:relative;`样式，请注意处理。由于汉字和英文书写展示方式不同，多行展示并旋转时可能导致边缘被切割。
+#### 注意：该类会给传入的`static`水印容器添加`position:relative;`样式，请注意处理。由于汉字和英文书写展示方式不同，多行展示并旋转时可能导致边缘被切割。
 
 #### 该类参考 Ant Design React 项目中 Watermark 组件改写，属性可参考[Watermark](https://ant.design/components/watermark-cn#watermark-demo-custom)
 

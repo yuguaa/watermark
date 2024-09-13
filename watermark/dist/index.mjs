@@ -20,7 +20,7 @@ function D(n) {
 }
 const G = (n) => D(n) ? 4 : 3;
 function at(n) {
-  return D(n) ? 4 : 2;
+  return D(n), 2;
 }
 function L(n, t, e = 1, o = !1) {
   const a = document.createElement("canvas"), l = a.getContext("2d"), s = n * e, i = t * e;
@@ -73,7 +73,7 @@ const W = class W {
       throw new Error("container is required");
     if (!this.options.container instanceof HTMLElement)
       throw new Error("container must be a HTMLElement");
-    this.options.container.style.position = "relative", this.markStyle = this.getMarkStyle(), this.watermarkMap = /* @__PURE__ */ new Map(), this.renderWatermark();
+    getComputedStyle(this.options.container).position === "static" && (this.options.container.style.position = "relative"), this.markStyle = this.getMarkStyle(), this.watermarkMap = /* @__PURE__ */ new Map(), this.renderWatermark();
   }
   getMarkStyle() {
     const { zIndex: t, gap: e, offset: o } = this.options, [a, l] = e, s = a / 2, i = l / 2, p = (o == null ? void 0 : o[0]) ?? s, f = (o == null ? void 0 : o[1]) ?? i;

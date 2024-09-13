@@ -27,7 +27,10 @@ class Watermark {
     if (!this.options.container instanceof HTMLElement) {
       throw new Error('container must be a HTMLElement')
     }
-    this.options.container.style.position = 'relative'
+    // 判断是否是相对定位
+    if (getComputedStyle(this.options.container).position === 'static') {
+      this.options.container.style.position = 'relative'
+    }
     this.markStyle = this.getMarkStyle()
     this.watermarkMap = new Map()
     this.renderWatermark()
@@ -91,7 +94,7 @@ class Watermark {
         ...this.markStyle,
         backgroundImage: `url('${base64Url}')`,
         backgroundSize: `${Math.floor(markWidth)}px`,
-        visibility: 'visible !important'
+        visibility: 'visible !important',
       })
 
       if (!this.watermarkMap.get(container)) {
@@ -113,7 +116,6 @@ class Watermark {
               this.renderWatermark()
             }
           })
-
           mo.observe(container, {
             attributes: true, // 观察目标节点的属性节点
             subtree: true, // 观察目标节点的所有后代节点
