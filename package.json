@@ -1,6 +1,6 @@
 {
   "name": "yugu-watermark",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "水印",
   "main": "index.js",
   "scripts": {
