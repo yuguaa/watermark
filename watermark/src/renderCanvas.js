@@ -39,7 +39,7 @@ function renderClips(content, rotate, ratio, width, height, font, gapX, gapY, gl
     const contents = Array.isArray(content) ? content : [content]
     contents?.forEach((item, index) => {
       ctx.fillText(
-        item ?? '',
+        item,
         contentWidth / 2,
         index * (mergedFontSize + getFontGap() * ratio) + patchWordRenderHeight(item)
       )
