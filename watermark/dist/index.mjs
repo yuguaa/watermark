@@ -38,7 +38,7 @@ function st(n, t, e, o, a, l, s, i, p, f = !1) {
     const I = Array.isArray(n) ? n : [n];
     I == null || I.forEach((j, V) => {
       c.fillText(
-        j ?? "",
+        j,
         r / 2,
         V * (Y + G() * e) + at(j)
       );
