@@ -76,7 +76,7 @@ const W = class W {
     getComputedStyle(this.options.container).position === "static" && (this.options.container.style.position = "relative"), this.markStyle = this.getMarkStyle(), this.watermarkMap = /* @__PURE__ */ new Map(), this.renderWatermark();
   }
   getMarkStyle() {
-    const { zIndex: t, gap: e, offset: o } = this.options, [a, l] = e, s = a / 2, i = l / 2, p = (o == null ? void 0 : o[0]) ?? s, f = (o == null ? void 0 : o[1]) ?? i;
+    const { zIndex: t, gap: e, offset: o } = this.options, [a, l] = e, s = a / 2, i = l / 2, p = (o == null ? void 0 : o[0]) || s, f = (o == null ? void 0 : o[1]) || i;
     let c = p - s, h = f - i;
     const r = {
       zIndex: t,
@@ -105,7 +105,7 @@ const W = class W {
       });
       i = Math.ceil(Math.max(...c.map((h) => h[0]))), p = Math.floor(Math.max(...c.map((h) => h[1]))) * f.length + (f.length - 1) * G();
     }
-    return [l ?? i, s ?? p];
+    return [l || i, s || p];
   }
   appendWatermark(t, e, o) {
     if (o) {
