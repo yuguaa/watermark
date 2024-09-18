@@ -40,8 +40,8 @@ class Watermark {
     const [gapX, gapY] = gap
     const gapXCenter = gapX / 2
     const gapYCenter = gapY / 2
-    const offsetLeft = offset?.[0] ?? gapXCenter
-    const offsetTop = offset?.[1] ?? gapYCenter
+    const offsetLeft = offset?.[0] || gapXCenter
+    const offsetTop = offset?.[1] || gapYCenter
     let positionLeft = offsetLeft - gapXCenter
     let positionTop = offsetTop - gapYCenter
     const markStyle = {
@@ -85,7 +85,7 @@ class Watermark {
       defaultHeight =
         Math.floor(Math.max(...sizes.map(size => size[1]))) * contents.length + (contents.length - 1) * getFontGap()
     }
-    return [width ?? defaultWidth, height ?? defaultHeight]
+    return [width || defaultWidth, height || defaultHeight]
   }
 
   appendWatermark(base64Url, markWidth, container) {
