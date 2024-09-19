@@ -47,7 +47,7 @@
             <n-form-item label="水印图片">
               <n-input v-model:value="options.image" clearable />
             </n-form-item>
-            <n-form-item label="水印文本">
+            <n-form-item label="水印文本(使用英文逗号分割体验多行水印)">
               <n-input v-model:value="options.content" clearable />
             </n-form-item>
           </n-card>
@@ -152,7 +152,10 @@ onMounted(() => {
 })
 watchEffect(() => {
   if (watermark.instance) {
-    watermark.instance.updateWatermark(options)
+    const content = options.content.split(',')
+    console.log(`🚀 ~ options.content:`, content)
+
+    watermark.instance.updateWatermark({...options,content})
   }
 })
 </script>
