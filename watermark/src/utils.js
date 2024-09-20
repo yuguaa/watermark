@@ -47,6 +47,10 @@ export const reRendering = (mutation, isWatermarkEle) => {
 
 export function deepMerge(target, source) {
   for (let key in source) {
+    if (Array.isArray(source[key])) {
+      target[key] = source[key] // 直接替换数组
+    }
+    // 如果是对象，就递归合并
     if (source[key] instanceof Object && key in target) {
       Object.assign(source[key], deepMerge(target[key], source[key]))
     }

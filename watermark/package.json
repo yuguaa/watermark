@@ -1,6 +1,6 @@
 {
   "name": "@yugu/watermark",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "javascript watermark 通用js水印",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

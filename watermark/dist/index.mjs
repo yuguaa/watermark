@@ -12,7 +12,7 @@ function it() {
 }
 function O(n, t) {
   for (let e in t)
-    t[e] instanceof Object && e in n && Object.assign(t[e], O(n[e], t[e]));
+    Array.isArray(t[e]) && (n[e] = t[e]), t[e] instanceof Object && e in n && Object.assign(t[e], O(n[e], t[e]));
   return Object.assign(n || {}, t), n;
 }
 function D(n) {
@@ -50,18 +50,18 @@ function st(n, t, e, o, a, l, s, i, p, f = !1) {
     const d = m * Math.cos(M) - g * Math.sin(M), u = m * Math.sin(M) + g * Math.cos(M);
     return [d, u];
   }
-  let S = 0, E = 0, y = 0, T = 0;
-  const v = r / 2, A = b / 2;
+  let y = 0, E = 0, S = 0, T = 0;
+  const A = r / 2, v = b / 2;
   [
-    [0 - v, 0 - A],
-    [0 + v, 0 - A],
-    [0 + v, 0 + A],
-    [0 - v, 0 + A]
+    [0 - A, 0 - v],
+    [0 + A, 0 - v],
+    [0 + A, 0 + v],
+    [0 - A, 0 + v]
   ].forEach(([m, g]) => {
     const [d, u] = U(m, g);
-    S = Math.min(S, d), E = Math.max(E, d), y = Math.min(y, u), T = Math.max(T, u);
+    y = Math.min(y, d), E = Math.max(E, d), S = Math.min(S, u), T = Math.max(T, u);
   });
-  const _ = S + w / 2, q = y + w / 2, x = E - S, k = T - y, z = s * e, C = i * e, F = (x + z) * 2, P = k + C, [B, Z] = L(F, P, void 0, f);
+  const _ = y + w / 2, q = S + w / 2, x = E - y, k = T - S, z = s * e, C = i * e, F = (x + z) * 2, P = k + C, [B, Z] = L(F, P, void 0, f);
   function H(m = 0, g = 0) {
     B.globalAlpha = p, B.drawImage(K, _, q, x, k, m, g, x, k);
   }
