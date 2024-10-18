@@ -1,13 +1,13 @@
-var tt = Object.defineProperty;
-var et = (n, t, e) => t in n ? tt(n, t, { enumerable: !0, configurable: !0, writable: !0, value: e }) : n[t] = e;
-var N = (n, t, e) => et(n, typeof t != "symbol" ? t + "" : t, e);
-function nt(n) {
+var et = Object.defineProperty;
+var nt = (n, t, e) => t in n ? et(n, t, { enumerable: !0, configurable: !0, writable: !0, value: e }) : n[t] = e;
+var N = (n, t, e) => nt(n, typeof t != "symbol" ? t + "" : t, e);
+function ot(n) {
   return n.replace(/([A-Z])/g, "-$1").toLowerCase();
 }
-function ot(n) {
-  return Object.keys(n).map((t) => `${nt(t)}: ${n[t]};`).join(" ");
+function it(n) {
+  return Object.keys(n).map((t) => `${ot(t)}: ${n[t]};`).join(" ");
 }
-function it() {
+function at() {
   return window.devicePixelRatio || 1;
 }
 function O(n, t) {
@@ -19,7 +19,7 @@ function D(n) {
   return /[\u4e00-\u9fa5]/.test(n);
 }
 const G = (n) => D(n) ? 4 : 3;
-function at(n) {
+function st(n) {
   return D(n), 2;
 }
 function L(n, t, e = 1, o = !1) {
@@ -28,44 +28,44 @@ function L(n, t, e = 1, o = !1) {
     Math.random() * 255
   )}, ${Math.random()})`, l.fillRect(0, 0, a.width, a.height)), l.save(), [l, a, s, i];
 }
-function st(n, t, e, o, a, l, s, i, p, f = !1) {
+function rt(n, t, e, o, a, l, s, i, p, f = !1) {
   const [c, h, r, b] = L(o, a, e, f);
   if (n instanceof HTMLImageElement)
     c.drawImage(n, 0, 0, r, b);
   else {
-    const { color: m, fontSize: g, fontStyle: d, fontWeight: u, fontFamily: J, textAlign: Q } = l, Y = Number(g) * e;
-    c.font = `${d} normal ${u} ${Y}px/${a}px ${J}`, c.fillStyle = m, c.textAlign = Q, c.textBaseline = "top";
+    const { color: m, fontSize: g, fontStyle: d, fontWeight: u, fontFamily: Q, textAlign: V } = l, Y = Number(g) * e;
+    c.font = `${d} normal ${u} ${Y}px/${a}px ${Q}`, c.fillStyle = m, c.textAlign = V, c.textBaseline = "top";
     const I = Array.isArray(n) ? n : [n];
-    I == null || I.forEach((j, V) => {
+    I == null || I.forEach((j, tt) => {
       c.fillText(
         j,
         r / 2,
-        V * (Y + G() * e) + at(j)
+        tt * (Y + G() * e) + st(j)
       );
     });
   }
-  const M = Math.PI / 180 * Number(t), R = Math.max(o, a), [$, K, w] = L(R, R, e, f);
-  $.translate(w / 2, w / 2), $.rotate(M), r > 0 && b > 0 && $.drawImage(h, -r / 2, -b / 2);
-  function U(m, g) {
+  const M = Math.PI / 180 * Number(t), K = Math.sqrt(o * o + a * a), R = Math.max(o, a, K), [$, U, y] = L(R, R, e, f);
+  $.translate(y / 2, y / 2), $.rotate(M), r > 0 && b > 0 && $.drawImage(h, -r / 2, -b / 2);
+  function q(m, g) {
     const d = m * Math.cos(M) - g * Math.sin(M), u = m * Math.sin(M) + g * Math.cos(M);
     return [d, u];
   }
-  let y = 0, E = 0, S = 0, T = 0;
+  let S = 0, E = 0, w = 0, T = 0;
   const A = r / 2, v = b / 2;
   [
-    [0 - A, 0 - v],
-    [0 + A, 0 - v],
-    [0 + A, 0 + v],
-    [0 - A, 0 + v]
+    [-A, -v],
+    [A, -v],
+    [A, v],
+    [-A, v]
   ].forEach(([m, g]) => {
-    const [d, u] = U(m, g);
-    y = Math.min(y, d), E = Math.max(E, d), S = Math.min(S, u), T = Math.max(T, u);
+    const [d, u] = q(m, g);
+    S = Math.min(S, d), E = Math.max(E, d), w = Math.min(w, u), T = Math.max(T, u);
   });
-  const _ = y + w / 2, q = S + w / 2, x = E - y, k = T - S, z = s * e, C = i * e, F = (x + z) * 2, P = k + C, [B, Z] = L(F, P, void 0, f);
+  const _ = S + y / 2, Z = w + y / 2, x = E - S, k = T - w, z = s * e, C = i * e, F = (x + z) * 2, P = k + C, [B, J] = L(F, P, void 0, f);
   function H(m = 0, g = 0) {
-    B.globalAlpha = p, B.drawImage(K, _, q, x, k, m, g, x, k);
+    B.globalAlpha = p, B.drawImage(U, _, Z, x, k, m, g, x, k);
   }
-  return H(), H(x + z, -k / 2 - C / 2), H(x + z, +k / 2 + C / 2), [Z.toDataURL(), F / e, P / e];
+  return H(), H(x + z, -k / 2 - C / 2), H(x + z, k / 2 + C / 2), [J.toDataURL(), F / e, P / e];
 }
 const W = class W {
   constructor(t) {
@@ -109,7 +109,7 @@ const W = class W {
   }
   appendWatermark(t, e, o) {
     if (o) {
-      const a = ot({
+      const a = it({
         ...this.markStyle,
         backgroundImage: `url('${t}')`,
         backgroundSize: `${Math.floor(e)}px`,
@@ -144,8 +144,8 @@ const W = class W {
   renderWatermark() {
     const e = document.createElement("canvas").getContext("2d");
     if (e) {
-      const o = it(), [a, l] = this.getMarkSize(e), s = (i) => {
-        const [p, f] = st(
+      const o = at(), [a, l] = this.getMarkSize(e), s = (i) => {
+        const [p, f] = rt(
           i,
           this.options.rotate,
           o,

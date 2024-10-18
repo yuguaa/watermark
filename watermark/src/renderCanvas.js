@@ -47,15 +47,17 @@ function renderClips(content, rotate, ratio, width, height, font, gapX, gapY, gl
   }
   // ==================== Rotate ====================
   const angle = (Math.PI / 180) * Number(rotate)
-  const maxSize = Math.max(width, height)
+  // 计算最大旋转尺寸（对角线长度）
+  const diagonal = Math.sqrt(width * width + height * height)
+  const maxSize = Math.max(width, height, diagonal)
   const [rCtx, rCanvas, realMaxSize] = prepareCanvas(maxSize, maxSize, ratio, isDebug)
-
+  // 平移和旋转
   rCtx.translate(realMaxSize / 2, realMaxSize / 2)
   rCtx.rotate(angle)
   if (contentWidth > 0 && contentHeight > 0) {
     rCtx.drawImage(canvas, -contentWidth / 2, -contentHeight / 2)
   }
-
+  // 计算旋转后顶点的位置
   function getRotatePos(x, y) {
     const targetX = x * Math.cos(angle) - y * Math.sin(angle)
     const targetY = x * Math.sin(angle) + y * Math.cos(angle)
@@ -70,10 +72,10 @@ function renderClips(content, rotate, ratio, width, height, font, gapX, gapY, gl
   const halfWidth = contentWidth / 2
   const halfHeight = contentHeight / 2
   const points = [
-    [0 - halfWidth, 0 - halfHeight],
-    [0 + halfWidth, 0 - halfHeight],
-    [0 + halfWidth, 0 + halfHeight],
-    [0 - halfWidth, 0 + halfHeight]
+    [-halfWidth, -halfHeight],
+    [halfWidth, -halfHeight],
+    [halfWidth, halfHeight],
+    [-halfWidth, halfHeight]
   ]
   points.forEach(([x, y]) => {
     const [targetX, targetY] = getRotatePos(x, y)
@@ -82,7 +84,7 @@ function renderClips(content, rotate, ratio, width, height, font, gapX, gapY, gl
     top = Math.min(top, targetY)
     bottom = Math.max(bottom, targetY)
   })
-
+  // 计算新的裁剪区域，确保所有内容都在可视范围内
   const cutLeft = left + realMaxSize / 2
   const cutTop = top + realMaxSize / 2
   const cutWidth = right - left
@@ -92,13 +94,17 @@ function renderClips(content, rotate, ratio, width, height, font, gapX, gapY, gl
   const filledWidth = (cutWidth + realGapX) * 2
   const filledHeight = cutHeight + realGapY
   const [fCtx, fCanvas] = prepareCanvas(filledWidth, filledHeight, undefined, isDebug)
+
+  // 绘制旋转后的图像
   function drawImg(targetX = 0, targetY = 0) {
     fCtx.globalAlpha = globalAlpha
     fCtx.drawImage(rCanvas, cutLeft, cutTop, cutWidth, cutHeight, targetX, targetY, cutWidth, cutHeight)
   }
-  drawImg()
-  drawImg(cutWidth + realGapX, -cutHeight / 2 - realGapY / 2)
-  drawImg(cutWidth + realGapX, +cutHeight / 2 + realGapY / 2)
+
+  drawImg() // 中心绘制
+  drawImg(cutWidth + realGapX, -cutHeight / 2 - realGapY / 2) // 复制一份到右侧
+  drawImg(cutWidth + realGapX, cutHeight / 2 + realGapY / 2) // 复制第二份到右下方
+
   return [fCanvas.toDataURL(), filledWidth / ratio, filledHeight / ratio]
 }
 

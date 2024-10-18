@@ -106,7 +106,7 @@ const options = reactive({
   zIndex: 9,
   globalAlpha: 0.15,
   image: null,
-  content: '菠萝吹雪',
+  content: '菠萝吹雪,菠萝吹雪菠萝吹雪菠萝吹雪菠萝吹雪菠萝,1111',
   gap: [100, 100],
   offset: [0, 0],
   font: {
